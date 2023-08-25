@@ -1,0 +1,270 @@
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-body">
+      <form
+        class="row g-1 g-lg-2"
+        [formGroup]="user"
+        (ngSubmit)="handleSubmit()"
+      >
+        <div class="col-12">
+          <div
+            class="text-center fs-3 fw-bold border-bottom border-3 border-dark pb-2"
+          >
+           {{title | titlecase}}
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="text"
+              id="firstName"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="First Name"
+            />
+            <label for="firstName">First Name</label>
+            <div
+              *ngIf="
+                user.get('firstName')?.invalid && user.get('firstName')?.touched
+              "
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('firstName')?.errors?.['required']"
+                >Please enter your first name</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('firstName')?.errors?.['minlength']"
+                >Your first name not less than 4 characters</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('firstName')?.errors?.['pattern']"
+                >Your first name not contain any special or numbers
+                characters</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="form-control"
+              placeholder="Last Name"
+            />
+            <label for="lastName">Last Name</label>
+            <div
+              *ngIf="
+                user.get('lastName')?.invalid && user.get('lastName')?.touched
+              "
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('lastName')?.errors?.['required']"
+                >Please enter your last name</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('lastName')?.errors?.['minlength']"
+                >Your last name not less than 4 characters</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('lastName')?.errors?.['pattern']"
+                >Your last name not contain any special or numbers
+                characters</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="date"
+              id="dob"
+              formControlName="dob"
+              class="form-control"
+              placeholder="Date of Birth"
+            />
+            <label for="dob">Date of Birth</label>
+            <div *ngIf="user.get('dob')?.invalid && user.get('dob')?.touched">
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('dob')?.errors?.['required']"
+                >Please enter your date of birth</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="text"
+              id="phone"
+              formControlName="phone"
+              class="form-control"
+              placeholder="Phone"
+            />
+            <label for="phone">Phone</label>
+            <div
+              *ngIf="user.get('phone')?.invalid && user.get('phone')?.touched"
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('phone')?.errors?.['required']"
+                >Please enter your phone number</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('phone')?.errors?.['minlength'] || user.get('phone')?.errors?.['maxlength']"
+                >Your phone number not greater than 10 digits or not less than
+                10 digits</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('phone')?.errors?.['pattern']"
+                >Please enter valid phone number</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <div class="form-control" id="gender">
+              <div class="form-check-inline">
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  formControlName="gender"
+                />
+                <label class="form-label ms-1" for="male">Male</label>
+              </div>
+              <div class="form-check-inline">
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                  formControlName="gender"
+                />
+                <label class="form-label ms-1" for="female">Female</label>
+              </div>
+            </div>
+            <div
+              *ngIf="user.get('gender')?.invalid && user.get('gender')?.touched"
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('gender')?.errors?.['required']"
+                >Please enter your gender</span
+              >
+            </div>
+            <label for="gender">Gender</label>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Email"
+            />
+            <label for="email">Email</label>
+            <div
+              *ngIf="user.get('email')?.invalid && user.get('email')?.touched"
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('email')?.errors?.['required']"
+                >Please enter mail id</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('email')?.errors?.['email']"
+                >Please enter valid mail id</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="text"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Password"
+            />
+            <label for="password">Password</label>
+            <div
+              *ngIf="
+                user.get('password')?.invalid && user.get('password')?.touched
+              "
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('password')?.errors?.['required']"
+                >Please provide your password</span
+              >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('password')?.errors?.['pattern']"
+                >Your password must be 6-20 characters long, contain letters and
+                one uppercase, numbers and special characters</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-floating">
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Confirm Password"
+            />
+            <label for="confirmPassword">Confirm Password</label>
+            <div
+              *ngIf="
+                user.get('confirmPassword')?.invalid &&
+                user.get('confirmPassword')?.touched
+              "
+            >
+              <span
+                class="form-text text-danger"
+                *ngIf="user.get('confirmPassword')?.errors?.['required']"
+                >Please enter Confirm Password</span
+              >
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="
+                user.get('confirmPassword')?.touched &&
+                user.hasError('doesNotMatch')
+              "
+            >
+              Password and Confirm password does not match
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="d-grid col-6 col-lg-4 gap-1 mx-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- <app-users-table [users]="users"></app-users-table> -->
+</div>
+

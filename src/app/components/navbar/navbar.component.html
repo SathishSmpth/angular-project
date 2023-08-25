@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand nav-link"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Angular</a
+    >
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mb-2 mb-lg-0"  *ngIf="isAuthenticated">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/shows" routerLinkActive="active"
+            >TV</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/movies" routerLinkActive="active"
+            >Movies</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/sports" routerLinkActive="active"
+            >Sports</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <!-- [appDropdownDirective] = "'something'" -->
+          <button class="nav-link dropdown-toggle" appDropdownDirective>
+            Dropdown
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center ms-auto">
+        <a
+          class="icon-link text-light px-3"
+          routerLink="movies/search"
+          routerLinkActive="active"
+          *ngIf="isAuthenticated"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            width="35"
+            height="25"
+            fill="white"
+          >
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+            />
+          </svg>
+        </a>
+        <div *ngIf="!isAuthenticated">
+          <a
+            routerLink="users/sign-up"
+            routerLinkActive="active"
+            class="btn btn-outline-light ms-1"
+            >Sign Up</a
+          >
+          <a
+            routerLink="users/login"
+            routerLinkActive="active"
+            class="btn btn-outline-light ms-1"
+            >Login</a
+          >
+        </div>
+        <button
+          routerLinkActive="active"
+          class="btn btn-outline-light ms-1"
+          (click)="logout()"
+          *ngIf="isAuthenticated"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
