@@ -1,1 +1,31 @@
-<p>view-movies works!</p>
+<div class="card text-bg-dark p-0">
+    <img
+      src="{{ backdrop }}"
+      class="card-img"
+      alt="..."
+      (error)="defaultBackDrop($event)"
+    />
+    <div class="card-img-overlay h-100">
+      <div class="card h-100  text-bg-dark bg-opacity-50">
+        <div class="row g-0">
+          <div class="col-md-4 h-100">
+            <img
+              src="{{ image }}"
+              class="img-fluid rounded-start h-100"
+              alt=""
+              (error)="defaultImage($event)"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.original_title }}</h5>
+              <p class="card-text">
+                {{ movie.overview }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

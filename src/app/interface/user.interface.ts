@@ -1,16 +1,12 @@
 export interface User {
   email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  photo?: string;
+  username: string;
   phone: number;
-  dob: string;
   password?: string;
   confirmPassword?: string;
 }
 
 export interface AuthResponse {
-  status: string;
+  success: boolean;
   token: string;
 }

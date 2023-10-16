@@ -1,4 +1,4 @@
-<div class="col" [@list]>
+<div class="col">
   <div class="card">
     <img
       src="{{ movieImage }}"
@@ -9,19 +9,10 @@
     <div class="card-body">
       <h5 class="card-title">{{ movie.original_title | uppercase }}</h5>
       <p class="card-text">
-        {{ movie.overview }}
-
-        {{ showDescrp ? movie.overview : (movie.overview | shorten : 15) }}
+        {{ movie.overview | shorten : 15 }}
       </p>
-      <button
-        class="btn btn-link"
-        (click)="showDescription()"
-        *ngIf="movie.overview.length > 150"
-      >
-        {{ showDescrp ? "Show Less" : "Show More" }}
-      </button>
       <p class="card-text">
-        {{ "release date" | titlecase }}: {{ releasedDetails | date }}
+        {{ "release date" | titlecase }}: {{ movie.release_date | date }}
       </p>
       <a (click)="watchNow(movie)" class="btn btn-primary"
         >Watch or More Details</a

@@ -2,15 +2,27 @@
   <div class="d-flex justify-content-center my-5 py-5" *ngIf="isLoading">
     <app-loader></app-loader>
   </div>
-  <div class="card col-5 col-md-4 mx-auto mt-5" *ngIf="!isLoading">
+  <div
+    class="card col-6 col-lg-5 mx-auto border-0 shadow mt-5"
+    *ngIf="!isLoading"
+  >
     <div class="card-body">
-      <form [formGroup]="loginCredential" (ngSubmit)="handleSubmit()">
-        <div class="col-12" *ngIf="error">
-          <div class="text-center alert alert-danger">
-            {{ error }}
-          </div>
+      <form
+        class="d-flex flex-column gap-3"
+        [formGroup]="loginCredential"
+        (ngSubmit)="handleSubmit()"
+      >
+        <div
+          class="text-center fs-3 fw-bold border-bottom border-3 border-dark pb-2"
+        >
+          Login
         </div>
-        <div class="mb-3">
+
+        <div  *ngIf="error" class="text-center alert alert-danger">
+          {{ error }}
+        </div>
+
+        <div>
           <label for="email" class="form-label">Email address</label>
           <input
             type="email"
@@ -19,7 +31,7 @@
             formControlName="email"
           />
         </div>
-        <div class="mb-3">
+        <div>
           <label for="password" class="form-label">Password</label>
           <input
             type="password"

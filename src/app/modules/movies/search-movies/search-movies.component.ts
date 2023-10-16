@@ -1,38 +1,25 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { SearchResults } from 'src/app/components/pages/search/search.interface';
+import { MovieDetails } from 'src/app/interface/movie.interface';
+import { SearchResults } from 'src/app/interface/search.interface';
 
 @Component({
   selector: 'app-search-movies',
   templateUrl: './search-movies.component.html',
   styleUrls: ['./search-movies.component.css'],
-  animations: [
-    trigger('divState', [
-      state(
-        'normal',
-        style({
-          'background-color': 'red',
-        })
-      ),
-      state(
-        'highlight',
-        style({
-          'background-color': 'green',
-        })
-      ),
-    ]),
-
-  ],
 })
 export class SearchMoviesComponent {
   searchMovies: string = '';
-  searchPageStyle: Record<string, string> = {};
-  state!: string;
+  movies!: MovieDetails[];
   searchResults!: SearchResults;
-  constructor(private http: HttpClient) {
-    this.state = 'normal';
-  }
+  constructor(private http: HttpClient) {}
 
   onSearch() {
     const options = {
@@ -45,12 +32,12 @@ export class SearchMoviesComponent {
     };
     const url = `https://api.themoviedb.org/3/search/movie?query=${this.searchMovies}&include_adult=false&language=en-US&page=1`;
     this.get(options, url);
-    this.state = this.searchMovies ? 'highlight' : 'normal';
   }
 
   private get(options: object, url: string) {
     this.http.get<SearchResults>(url, options).subscribe((response) => {
       this.searchResults = response;
+      this.movies = response.results;
     });
   }
 }

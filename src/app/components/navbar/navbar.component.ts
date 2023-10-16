@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserAuthService } from 'src/app/modules/user/userAuth.service';
+import { UserAuthService } from 'src/app/services/userAuth.service';
 
 @Component({
   selector: 'app-navbar',

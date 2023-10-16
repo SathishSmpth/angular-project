@@ -6,8 +6,19 @@ import { LoaderIndicatorLdsComponent } from './loader-indicator-lds/loader-indic
 import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
-  declarations: [MovieCardComponent, ShortenPipe, LoaderIndicatorLdsComponent, LoaderComponent],
-  exports: [MovieCardComponent, LoaderIndicatorLdsComponent,LoaderComponent],
+  declarations: [
+    MovieCardComponent,
+    ShortenPipe,
+    LoaderIndicatorLdsComponent,
+    LoaderComponent,
+  ],
+  exports: [
+    MovieCardComponent,
+    LoaderIndicatorLdsComponent,
+    LoaderComponent,
+    MovieCardComponent,
+    ShortenPipe
+  ],
   imports: [CommonModule],
 })
 export class SharedModule {}

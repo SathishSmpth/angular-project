@@ -1,1 +1,70 @@
-<h1>Hme page</h1>
+<div class="container-fluid p-0">
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      *ngIf="playingMovies; else loader"
+    >
+      <div class="carousel-inner m-0">
+        <div
+          class="{{ i === 0 ? 'carousel-item h-auto active' : 'carousel-item' }}"
+          *ngFor="let movie of playingMovies.results; let i = index"
+        >
+          <div class="card text-bg-dark">
+            <img
+              src="{{ 'https://image.tmdb.org/t/p/w500' + movie.backdrop_path }}"
+              class="d-block w-100"
+              alt="..."
+            />
+            <div class="card-img-overlay">
+              <div class="card text-bg-dark bg-opacity-50">
+                <div class="row g-0">
+                  <div class="col-4">
+                    <img
+                      src="{{
+                        'https://image.tmdb.org/t/p/w500' + movie.poster_path
+                      }}"
+                      class="img-fluid rounded-start"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="col-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ movie.title }}</h5>
+                      <p class="card-text">
+                        {{ movie.overview }}
+                      </p>
+                      <p class="card-text">
+                        Released On : {{ movie.release_date | date }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <ng-template #loader>
+      <app-loader></app-loader>
+    </ng-template>
+  </div>
+  

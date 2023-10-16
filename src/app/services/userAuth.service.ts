@@ -1,24 +1,19 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthResponse, User } from './user.interface';
+import { AuthResponse, User } from '../interface/user.interface';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
-import { NewUser } from './user.model';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UserAuthService {
   user = new BehaviorSubject<any>(null);
-
   constructor(private http: HttpClient,private router:Router) {}
 
   signUp(signUpData: User) {
     return this.http
-      .post<AuthResponse>('http://localhost:4000/users/sign-up', {
+      .post<AuthResponse>('https://node-by2j.onrender.com/api/v1/auth/signup', {
         email: signUpData.email,
-        firstName: signUpData.firstName,
-        lastName: signUpData.lastName,
-        gender: signUpData.gender,
-        dob: signUpData.dob,
+        username: signUpData.username,
         phone: signUpData.phone,
         password: signUpData.password,
         confirmPassword: signUpData.confirmPassword,
@@ -30,7 +25,7 @@ export class UserAuthService {
   }
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponse>('http://localhost:4000/users/login', {
+      .post<AuthResponse>('https://node-by2j.onrender.com/api/v1/auth/login', {
         email: email,
         password: password,
       })
@@ -39,20 +34,28 @@ export class UserAuthService {
         tap((resData) => this.handleAuthentication(resData))
       );
   }
+  autoLogin() {
+    const userData: any = localStorage.getItem('userData');
+    if (!userData) {
+      return;
+    }
+    const userDetails:AuthResponse = JSON.parse(userData);
+
+    if (userDetails.token) {
+      this.user.next(userDetails);
+    }
+    this.router.navigate(['/home']);
+  }
   logout() {
     this.user.next(null);
-    this.router.navigate(['/users/login'])
+    this.router.navigate(['/auth/login'])
     localStorage.removeItem('userData');
   }
   private handleAuthentication(resData: AuthResponse) {
-    const expiresIn = new Date(new Date().getTime() + 1 * 60 * 60 * 1000);
-    const userData = new NewUser(resData.token, expiresIn);
-    this.user.next(userData);
-    localStorage.setItem('userData', JSON.stringify(userData));
+    this.user.next(resData);
+    localStorage.setItem('userData', JSON.stringify(resData));
   }
   private handleError(errorRes: HttpErrorResponse) {
-    console.log(errorRes);
-
     if (errorRes.error) {
       return throwError(errorRes.error.message);
     } else {
